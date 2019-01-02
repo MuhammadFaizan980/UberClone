@@ -7,10 +7,11 @@ import android.widget.ProgressBar
 
 import com.whatsclone.muhammadfaizan.uberclone.LoginRegister.LoginActivity
 
-class BackgroundTask constructor(progressBar: ProgressBar, context: Context) : AsyncTask<Void, Int, Int>() {
+class BackgroundTask constructor(progressBar: ProgressBar, context: Context, splashScreen: ActivityFinishInterface) : AsyncTask<Void, Int, Int>() {
 
-    private var progressBar : ProgressBar = progressBar
-    private var context : Context = context
+    private var progressBar: ProgressBar = progressBar
+    private var context: Context = context
+    private var activityFinisher: ActivityFinishInterface = splashScreen
 
     override fun doInBackground(vararg voids: Void): Int? {
         for (i in 1..100) {
@@ -31,5 +32,6 @@ class BackgroundTask constructor(progressBar: ProgressBar, context: Context) : A
 
     override fun onPostExecute(integer: Int?) {
         context.startActivity(Intent(context.applicationContext, LoginActivity::class.java))
+        activityFinisher.endSplashScreen()
     }
 }
