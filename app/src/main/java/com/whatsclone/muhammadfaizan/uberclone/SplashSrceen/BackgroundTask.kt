@@ -16,7 +16,7 @@ class BackgroundTask constructor(progressBar: ProgressBar, context: Context, spl
     override fun doInBackground(vararg voids: Void): Int? {
         for (i in 1..100) {
             try {
-                Thread.sleep(100)
+                Thread.sleep(90)
                 publishProgress(i)
             } catch (e: InterruptedException) {
                 e.printStackTrace()

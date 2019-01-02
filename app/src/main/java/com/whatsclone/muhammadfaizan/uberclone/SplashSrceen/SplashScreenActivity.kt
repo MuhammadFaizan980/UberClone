@@ -19,6 +19,7 @@ class SplashScreenActivity : AppCompatActivity(), ActivityFinishInterface {
 
         progressBar = findViewById(R.id.progressSplash)
         backgroundTask = BackgroundTask(progressBar, this@SplashScreenActivity, this@SplashScreenActivity)
+        backgroundTask.execute()
     }
 
     override fun endSplashScreen() {
