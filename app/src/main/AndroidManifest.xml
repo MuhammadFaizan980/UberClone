@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserComponents.LoginRegister.LoginViewRider" />
-        <activity android:name=".WelcomeActivity.ActivityWelcome"></activity>
+        <activity android:name=".WelcomeActivity.ActivityWelcome" />
+        <activity android:name=".DriverComponents.LoginRegister.View.LoginViewDriver"></activity>
     </application>
 
 </manifest>
