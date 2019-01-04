@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.AsyncTask
 import android.widget.ProgressBar
 
-import com.whatsclone.muhammadfaizan.uberclone.LoginRegister.LoginActivity
+import com.whatsclone.muhammadfaizan.uberclone.LoginRegister.LoginView
 
 class BackgroundTask constructor(progressBar: ProgressBar, context: Context, splashScreen: ActivityFinishInterface) : AsyncTask<Void, Int, Int>() {
 
@@ -31,7 +31,7 @@ class BackgroundTask constructor(progressBar: ProgressBar, context: Context, spl
     }
 
     override fun onPostExecute(integer: Int?) {
-        context.startActivity(Intent(context.applicationContext, LoginActivity::class.java))
+        context.startActivity(Intent(context.applicationContext, LoginView::class.java))
         activityFinisher.endSplashScreen()
     }
 }
