@@ -12,12 +12,11 @@
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="192dp"
+        android:layout_marginEnd="8dp"
         android:scaleType="fitXY"
         android:src="@drawable/app_logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,10 +26,10 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="316dp"
+        android:layout_marginTop="356dp"
         android:layout_marginEnd="8dp"
         android:progress="0"
-        android:progressTint="#2c4c50"
+        android:progressTint="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
