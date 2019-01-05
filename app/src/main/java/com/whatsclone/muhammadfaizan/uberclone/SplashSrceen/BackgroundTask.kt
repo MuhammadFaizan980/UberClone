@@ -17,7 +17,7 @@ class BackgroundTask constructor(progressBar: ProgressBar, context: Context, spl
         for (i in 1..100) {
             try {
                 publishProgress(i)
-                Thread.sleep(30)
+                Thread.sleep(10)
             } catch (e: InterruptedException) {
                 e.printStackTrace()
             }
