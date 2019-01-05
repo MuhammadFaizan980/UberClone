@@ -45,12 +45,11 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
 
     private fun passListenerToPresenter() {
         btnLogin.setOnClickListener {
+            btnLogin.isEnabled = false
             email = edtEmail.text.toString()
             password = edtPassword.text.toString()
             presenterRider.onLoginInitiated(email, password)
         }
-
-        btnLogin.isEnabled = false
     }
 
     override fun onBackPressed() {
