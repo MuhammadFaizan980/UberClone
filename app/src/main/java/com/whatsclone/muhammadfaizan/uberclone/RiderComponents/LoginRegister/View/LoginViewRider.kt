@@ -25,6 +25,8 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
     private lateinit var edtPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var presenterRider: IPresenterRider
+    private var email: String = ""
+    private var password: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +44,13 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
     }
 
     private fun passListenerToPresenter() {
-        var email: String = ""
-        var password: String = ""
         btnLogin.setOnClickListener {
             email = edtEmail.text.toString()
             password = edtPassword.text.toString()
             presenterRider.onLoginInitiated(email, password)
         }
+
+        btnLogin.isEnabled = false
     }
 
     override fun onBackPressed() {
@@ -59,14 +61,33 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
     @SuppressLint("ResourceAsColor")
     override fun onLoginResults(results: Boolean) {
         if (results) {
-            var snackBar: Snackbar = Snackbar.make(container, "Valid credentials", Snackbar.LENGTH_SHORT)
+            presenterRider.authenticateUser(email, password)
+        } else {
+            var snackBar: Snackbar = Snackbar.make(container, "Enter a valid email address and password", Snackbar.LENGTH_SHORT)
+            var mView: View = snackBar.view
+            mView.setBackgroundColor(ContextCompat.getColor(this@LoginViewRider, R.color.red))
+            var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
+            txtView.setTextColor(Color.WHITE)
+            snackBar.show()
+            btnLogin.isEnabled = true
+        }
+    }
+
+    override fun onFirebaseResults(results: Boolean, exc: Exception) {
+        if (results) {
+            btnLogin.isEnabled = true
+            var snackBar: Snackbar = Snackbar.make(container, "Log in success", Snackbar.LENGTH_SHORT)
             var mView: View = snackBar.view
             mView.setBackgroundColor(ContextCompat.getColor(this@LoginViewRider, R.color.blue))
             var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
             txtView.setTextColor(Color.WHITE)
             snackBar.show()
         } else {
-            var snackBar: Snackbar = Snackbar.make(container, "Invalid credentials", Snackbar.LENGTH_SHORT)
+            btnLogin.isEnabled = true
+            var snackBar: Snackbar = Snackbar.make(container, "Log in error", Snackbar.LENGTH_LONG)
+            snackBar.setAction("DETAILS", View.OnClickListener {
+                //TODO: show error dialog with details
+            })
             var mView: View = snackBar.view
             mView.setBackgroundColor(ContextCompat.getColor(this@LoginViewRider, R.color.red))
             var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
