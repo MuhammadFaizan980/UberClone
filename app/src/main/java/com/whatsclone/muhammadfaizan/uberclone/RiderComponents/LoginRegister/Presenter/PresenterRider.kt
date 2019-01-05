@@ -18,9 +18,9 @@ class PresenterRider(view: ILoginViewRider) : IPresenterRider {
     override fun authenticateUser(email: String, password: String) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                loginViewRider.onFirebaseResults(true)
+                loginViewRider.onFirebaseResults(true, null)
             } else {
-                loginViewRider.onFirebaseResults(false)
+                loginViewRider.onFirebaseResults(false, task.exception!!)
             }
         }
     }

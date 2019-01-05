@@ -73,7 +73,7 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
         }
     }
 
-    override fun onFirebaseResults(results: Boolean, exc: Exception) {
+    override fun onFirebaseResults(results: Boolean, exc: Exception?) {
         if (results) {
             btnLogin.isEnabled = true
             var snackBar: Snackbar = Snackbar.make(container, "Log in success", Snackbar.LENGTH_SHORT)
