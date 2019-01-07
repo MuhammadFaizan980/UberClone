@@ -1,6 +1,6 @@
 package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderRegister.RegisterView
 
 interface IRegisterViewRider {
-    fun onRegistrationResults(results: String)
+    fun onValidationResults(results: Boolean)
     fun onFirebaseResults(exc: Exception?)
 }
