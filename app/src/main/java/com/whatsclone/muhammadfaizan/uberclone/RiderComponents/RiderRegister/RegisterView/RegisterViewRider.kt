@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
@@ -47,8 +48,13 @@ class RegisterViewRider : AppCompatActivity(), IRegisterViewRider {
     }
 
     private fun passListenersToPresenter() {
+        txtLogin.setOnClickListener {
+            startActivity(Intent(this@RegisterViewRider, LoginViewRider::class.java))
+            this@RegisterViewRider.finish()
+        }
         btnRegister.setOnClickListener {
             btnRegister.isEnabled = false
+            progressBar.visibility = View.VISIBLE
             email = edtEmail.text.toString()
             password = edtPassword.text.toString()
             presenter.initValidation(email, password)
@@ -70,7 +76,33 @@ class RegisterViewRider : AppCompatActivity(), IRegisterViewRider {
     }
 
     override fun onFirebaseResults(exc: Exception?) {
-        //TODO: modify this function
+        if (exc == null) {
+            hideProgress()
+            var snackBar: Snackbar = Snackbar.make(mainLayout, "Registration success", Snackbar.LENGTH_SHORT)
+            var mView: View = snackBar.view
+            mView.setBackgroundColor(ContextCompat.getColor(this@RegisterViewRider, R.color.blue))
+            var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
+            txtView.setTextColor(Color.WHITE)
+            snackBar.show()
+        } else {
+            hideProgress()
+            var snackbar: Snackbar = Snackbar.make(mainLayout, "Registration error", Snackbar.LENGTH_LONG)
+            snackbar.setAction("DETAILS") {
+                var alertDialog: AlertDialog.Builder = AlertDialog.Builder(this@RegisterViewRider, R.style.mDialog)
+                alertDialog.setTitle("Registration Error")
+                alertDialog.setMessage(exc!!.message!!.toString())
+                alertDialog.setCancelable(false)
+                alertDialog.setPositiveButton("Close") { dialog, which ->
+                    dialog.cancel()
+                }
+                alertDialog.show()
+            }
+            var mView: View = snackbar.view
+            mView.setBackgroundColor(ContextCompat.getColor(this@RegisterViewRider, R.color.red))
+            var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
+            txtView.setTextColor(Color.WHITE)
+            snackbar.show()
+        }
     }
 
     override fun onBackPressed() {
