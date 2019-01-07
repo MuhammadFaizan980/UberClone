@@ -1,9 +1,9 @@
-package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.LoginRegister.Presenter
+package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter
 
 import com.google.firebase.auth.FirebaseAuth
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.LoginRegister.Model.IModelRider
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.LoginRegister.Model.ModelRider
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.LoginRegister.View.ILoginViewRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginModel.IModelRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginModel.ModelRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginView.ILoginViewRider
 
 class PresenterRider(view: ILoginViewRider) : IPresenterRider {
 

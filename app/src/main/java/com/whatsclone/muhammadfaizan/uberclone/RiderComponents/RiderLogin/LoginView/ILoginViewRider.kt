@@ -1,4 +1,4 @@
-package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.LoginRegister.View
+package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginView
 
 interface ILoginViewRider {
     fun onLoginResults(results: Boolean)

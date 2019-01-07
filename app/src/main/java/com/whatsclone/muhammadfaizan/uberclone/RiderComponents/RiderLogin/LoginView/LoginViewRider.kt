@@ -1,7 +1,6 @@
 package com.whatsclone.muhammadfaizan.uberclone.UserComponents.LoginRegister
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -16,14 +15,16 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.whatsclone.muhammadfaizan.uberclone.R
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.LoginRegister.Presenter.IPresenterRider
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.LoginRegister.Presenter.PresenterRider
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.LoginRegister.View.ILoginViewRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter.IPresenterRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter.PresenterRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginView.ILoginViewRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderRegister.RegisterView.RegisterViewRider
 import com.whatsclone.muhammadfaizan.uberclone.WelcomeActivity.ActivityWelcome
 
 class LoginViewRider : AppCompatActivity(), ILoginViewRider {
 
     private lateinit var container: ConstraintLayout
+    private lateinit var txtSignUp: TextView
     private lateinit var edtEmail: EditText
     private lateinit var edtPassword: EditText
     private lateinit var btnLogin: Button
@@ -37,9 +38,11 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
         setContentView(R.layout.activity_login_view_rider)
         initViews()
         passListenerToPresenter()
+        goToRegisterActivity()
     }
 
     private fun initViews() {
+        txtSignUp = findViewById(R.id.btn_signup_rider)
         container = findViewById(R.id.login_container_rider)
         edtEmail = findViewById(R.id.edt_email_login_rider)
         edtPassword = findViewById(R.id.edt_password_login_rider)
@@ -116,5 +119,12 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
     private fun hideProgressBar() {
         this.progressbar.visibility = View.INVISIBLE
         btnLogin.isEnabled = true
+    }
+
+    private fun goToRegisterActivity() {
+        txtSignUp.setOnClickListener {
+            startActivity(Intent(this@LoginViewRider, RegisterViewRider::class.java))
+            this@LoginViewRider.finish()
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.LoginRegister.Presenter
+package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter
 
 interface IPresenterRider {
     fun onLoginInitiated(email: String, password: String)

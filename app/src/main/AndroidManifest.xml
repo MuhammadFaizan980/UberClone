@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".UserComponents.LoginRegister.LoginViewRider" />
         <activity android:name=".WelcomeActivity.ActivityWelcome" />
-        <activity android:name=".DriverComponents.LoginRegister.View.LoginViewDriver"></activity>
+        <activity android:name=".DriverComponents.LoginRegister.View.LoginViewDriver" />
+        <activity android:name=".RiderComponents.RiderRegister.RegisterView.RegisterViewRider"></activity>
     </application>
 
 </manifest>

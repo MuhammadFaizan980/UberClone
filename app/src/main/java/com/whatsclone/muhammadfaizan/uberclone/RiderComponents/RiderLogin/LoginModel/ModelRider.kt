@@ -1,4 +1,4 @@
-package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.LoginRegister.Model
+package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginModel
 
 class ModelRider constructor(email: String, password: String) : IModelRider {
 
