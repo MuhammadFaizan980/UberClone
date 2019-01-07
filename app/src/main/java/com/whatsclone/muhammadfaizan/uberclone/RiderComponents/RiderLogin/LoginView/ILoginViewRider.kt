@@ -2,5 +2,5 @@ package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.Login
 
 interface ILoginViewRider {
     fun onLoginResults(results: Boolean)
-    fun onFirebaseResults(results: Boolean, exc : Exception?)
+    fun onFirebaseResults(results: Boolean, exc: Exception?)
 }

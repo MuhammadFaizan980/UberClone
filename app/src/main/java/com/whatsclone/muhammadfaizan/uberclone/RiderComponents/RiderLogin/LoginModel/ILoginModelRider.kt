@@ -1,5 +1,5 @@
 package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginModel
 
-interface IModelRider {
+interface ILoginModelRider {
     fun validateCredentials() : Boolean
 }

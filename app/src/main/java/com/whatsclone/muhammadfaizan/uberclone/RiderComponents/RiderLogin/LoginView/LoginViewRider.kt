@@ -15,8 +15,8 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.whatsclone.muhammadfaizan.uberclone.R
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter.IPresenterRider
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter.PresenterRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter.IPresenterLoginRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter.PresenterLoginRider
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginView.ILoginViewRider
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderRegister.RegisterView.RegisterViewRider
 import com.whatsclone.muhammadfaizan.uberclone.WelcomeActivity.ActivityWelcome
@@ -29,7 +29,7 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
     private lateinit var edtPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var progressbar: ProgressBar
-    private lateinit var presenterRider: IPresenterRider
+    private lateinit var presenterLoginRider: IPresenterLoginRider
     private var email: String = ""
     private var password: String = ""
 
@@ -42,13 +42,13 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
     }
 
     private fun initViews() {
-        txtSignUp = findViewById(R.id.btn_signup_rider)
+        txtSignUp = findViewById(R.id.txt_signin_rider)
         container = findViewById(R.id.login_container_rider)
         edtEmail = findViewById(R.id.edt_email_login_rider)
         edtPassword = findViewById(R.id.edt_password_login_rider)
         btnLogin = findViewById(R.id.btn_login_rider)
         progressbar = findViewById(R.id.progress_login_rider)
-        presenterRider = PresenterRider(this@LoginViewRider)
+        presenterLoginRider = PresenterLoginRider(this@LoginViewRider)
     }
 
     private fun passListenerToPresenter() {
@@ -57,7 +57,7 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
             progressbar.visibility = View.VISIBLE
             email = edtEmail.text.toString()
             password = edtPassword.text.toString()
-            presenterRider.onLoginInitiated(email, password)
+            presenterLoginRider.onLoginInitiated(email, password)
         }
     }
 
@@ -69,7 +69,7 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
     @SuppressLint("ResourceAsColor")
     override fun onLoginResults(results: Boolean) {
         if (results) {
-            presenterRider.authenticateUser(email, password)
+            presenterLoginRider.authenticateUser(email, password)
         } else {
             hideProgressBar()
             var snackBar: Snackbar = Snackbar.make(container, "Enter a valid email address and password", Snackbar.LENGTH_SHORT)

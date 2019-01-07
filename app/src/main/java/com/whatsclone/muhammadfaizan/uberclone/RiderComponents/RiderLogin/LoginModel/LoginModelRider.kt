@@ -1,6 +1,6 @@
 package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginModel
 
-class ModelRider constructor(email: String, password: String) : IModelRider {
+class LoginModelRider constructor(email: String, password: String) : ILoginModelRider {
 
     private var email_rider: String = email
     private var password_rider: String = password

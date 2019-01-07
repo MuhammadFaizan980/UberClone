@@ -1,18 +1,18 @@
 package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter
 
 import com.google.firebase.auth.FirebaseAuth
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginModel.IModelRider
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginModel.ModelRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginModel.ILoginModelRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginModel.LoginModelRider
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginView.ILoginViewRider
 
-class PresenterRider(view: ILoginViewRider) : IPresenterRider {
+class PresenterLoginRider(view: ILoginViewRider) : IPresenterLoginRider {
 
     private var loginViewRider: ILoginViewRider = view
-    private lateinit var modelRider: IModelRider
+    private lateinit var loginModelRider: ILoginModelRider
 
     override fun onLoginInitiated(email: String, password: String) {
-        modelRider = ModelRider(email, password)
-        loginViewRider.onLoginResults(modelRider.validateCredentials())
+        loginModelRider = LoginModelRider(email, password)
+        loginViewRider.onLoginResults(loginModelRider.validateCredentials())
     }
 
     override fun authenticateUser(email: String, password: String) {

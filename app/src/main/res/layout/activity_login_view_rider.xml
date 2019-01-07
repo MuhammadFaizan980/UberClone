@@ -102,7 +102,7 @@
             android:textColor="#ffffff" />
 
         <TextView
-            android:id="@+id/btn_signup_rider"
+            android:id="@+id/txt_signin_rider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign up "
