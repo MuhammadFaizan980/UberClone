@@ -47,7 +47,7 @@ class RegisterViewRider : AppCompatActivity(), IRegisterViewRider {
     }
 
     override fun onFirebaseResults(exc: Exception?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO: modify this function
     }
 
     override fun onBackPressed() {
