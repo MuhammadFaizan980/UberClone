@@ -9,7 +9,7 @@ import android.widget.ProgressBar
 import com.whatsclone.muhammadfaizan.uberclone.R
 import de.hdodenhof.circleimageview.CircleImageView
 
-class RiderProfileSetup : AppCompatActivity() {
+class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
 
     private lateinit var edtUserName: EditText
     private lateinit var edtuserPhone: EditText
@@ -30,6 +30,15 @@ class RiderProfileSetup : AppCompatActivity() {
         imgUser = findViewById(R.id.img_rider_set_image)
         progressBar = findViewById(R.id.progress_rider_profile_setup)
     }
+
+    override fun uploadResult(results: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun finalResults(results: Exception) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 
     private fun hideProgress() {
         btnSave.isEnabled = true
