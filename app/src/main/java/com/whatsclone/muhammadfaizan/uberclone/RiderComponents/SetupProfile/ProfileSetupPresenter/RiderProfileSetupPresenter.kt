@@ -4,7 +4,7 @@ import android.content.Context
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupView.IRiderProfileSetup
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupView.RiderProfileSetup
 
-class RiderPresenter constructor(context: Context, riderView: RiderProfileSetup) : IRiderPresenter {
+class RiderProfileSetupPresenter constructor(context: Context, riderView: RiderProfileSetup) : IRiderProfileSetupPresenter {
 
     private var context: Context = context
     private var riderView: IRiderProfileSetup = riderView

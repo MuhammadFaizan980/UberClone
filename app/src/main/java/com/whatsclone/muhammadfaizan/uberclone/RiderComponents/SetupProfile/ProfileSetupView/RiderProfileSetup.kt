@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import com.whatsclone.muhammadfaizan.uberclone.R
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.IRiderProfileSetupPresenter
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.RiderProfileSetupPresenter
 import de.hdodenhof.circleimageview.CircleImageView
 
 class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
@@ -16,11 +18,13 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
     private lateinit var btnSave: Button
     private lateinit var imgUser: CircleImageView
     private lateinit var progressBar: ProgressBar
+    private lateinit var profileSetupPresenter: IRiderProfileSetupPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rider_profile_setup)
         initViews()
+
     }
 
     private fun initViews() {
@@ -29,6 +33,7 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
         btnSave = findViewById(R.id.btn_save_rider_profile)
         imgUser = findViewById(R.id.img_rider_set_image)
         progressBar = findViewById(R.id.progress_rider_profile_setup)
+        profileSetupPresenter = RiderProfileSetupPresenter(this, this@RiderProfileSetup)
     }
 
     override fun uploadResult(results: String) {
