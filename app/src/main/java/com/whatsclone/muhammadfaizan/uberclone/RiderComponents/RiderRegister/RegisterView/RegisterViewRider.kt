@@ -16,6 +16,7 @@ import android.widget.TextView
 import com.whatsclone.muhammadfaizan.uberclone.R
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderRegister.RegisterPresenter.IPresenterRegisterRider
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderRegister.RegisterPresenter.PresenterRegisterRider
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupView.RiderProfileSetup
 import com.whatsclone.muhammadfaizan.uberclone.UserComponents.LoginRegister.LoginViewRider
 
 class RegisterViewRider : AppCompatActivity(), IRegisterViewRider {
@@ -78,12 +79,8 @@ class RegisterViewRider : AppCompatActivity(), IRegisterViewRider {
     override fun onFirebaseResults(exc: Exception?) {
         if (exc == null) {
             hideProgress()
-            var snackBar: Snackbar = Snackbar.make(mainLayout, "Registration success", Snackbar.LENGTH_SHORT)
-            var mView: View = snackBar.view
-            mView.setBackgroundColor(ContextCompat.getColor(this@RegisterViewRider, R.color.blue))
-            var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
-            txtView.setTextColor(Color.WHITE)
-            snackBar.show()
+            startActivity(Intent(this@RegisterViewRider, RiderProfileSetup::class.java))
+            this@RegisterViewRider.finish()
         } else {
             hideProgress()
             var snackbar: Snackbar = Snackbar.make(mainLayout, "Registration error", Snackbar.LENGTH_LONG)

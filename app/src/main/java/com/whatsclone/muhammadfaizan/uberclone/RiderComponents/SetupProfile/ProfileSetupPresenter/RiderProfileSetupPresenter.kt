@@ -19,7 +19,7 @@ class RiderProfileSetupPresenter constructor(context: Context, riderView: RiderP
     private var context: Context = context
     private var riderView: IRiderProfileSetup = riderView
     private lateinit var model: IRiderProfileSetupModel
-    private var storageRef: StorageReference = FirebaseStorage.getInstance().getReference("/Profile_Images/${FirebaseAuth.getInstance().uid.toString()}.jpg")
+    private var storageRef: StorageReference = FirebaseStorage.getInstance().getReference("/Profile_Pics/${FirebaseAuth.getInstance().uid.toString()}.jpg")
 
     override fun uploadImage(stream: ByteArrayOutputStream) {
         var uploadTask = storageRef.putBytes(stream.toByteArray())
@@ -33,10 +33,9 @@ class RiderProfileSetupPresenter constructor(context: Context, riderView: RiderP
             return@Continuation storageRef.downloadUrl
         }).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                //handle uri
+                riderView.onUploadResult(null, task.result!!)
             } else {
-                // Handle failures
-                // ...
+                riderView.onUploadResult(task.exception!!, null)
             }
         }
     }

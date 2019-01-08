@@ -4,7 +4,7 @@ import android.net.Uri
 import java.net.URL
 
 interface IRiderProfileSetup {
-    fun onUploadResult(results: Exception?, url: Uri)
-    fun onDatabaseResults(results: Exception?)
+    fun onUploadResult(exc: Exception?, uri: Uri?)
+    fun onDatabaseResults(exc: Exception?)
     fun onValidationResults(results: Boolean)
 }
