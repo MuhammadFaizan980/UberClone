@@ -3,9 +3,9 @@ package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.Pro
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -15,6 +15,7 @@ import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.Prof
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.RiderProfileSetupPresenter
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.ByteArrayOutputStream
+import java.net.URL
 
 class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
 
@@ -23,9 +24,11 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
     private lateinit var btnSave: Button
     private lateinit var imgUser: CircleImageView
     private lateinit var progressBar: ProgressBar
-    private lateinit var profileSetupPresenter: IRiderProfileSetupPresenter
+    private lateinit var presenter: IRiderProfileSetupPresenter
     lateinit var bitmap: Bitmap
     lateinit var stream: ByteArrayOutputStream
+    private lateinit var email: String
+    private lateinit var phone: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +44,7 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
         btnSave = findViewById(R.id.btn_save_rider_profile)
         imgUser = findViewById(R.id.img_rider_set_image)
         progressBar = findViewById(R.id.progress_rider_profile_setup)
-        profileSetupPresenter = RiderProfileSetupPresenter(this, this@RiderProfileSetup)
+        presenter = RiderProfileSetupPresenter(this, this@RiderProfileSetup)
     }
 
     private fun getImage() {
@@ -53,14 +56,28 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
     }
 
     private fun passListeners() {
-
+        btnSave.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
+            btnSave.isEnabled = false
+            email = edtUserName.text.toString()
+            phone = edtuserPhone.text.toString()
+            presenter.initValidation(email, phone)
+        }
     }
 
-    override fun uploadResult(results: String) {
+    override fun onValidationResults(results: Boolean) {
+        if (results) {
+            presenter.uploadImage(stream)
+        } else {
+            hideProgress()
+        }
+    }
+
+    override fun onUploadResult(results: Exception?, uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun finalResults(results: Exception) {
+    override fun onDatabaseResults(results: Exception?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
