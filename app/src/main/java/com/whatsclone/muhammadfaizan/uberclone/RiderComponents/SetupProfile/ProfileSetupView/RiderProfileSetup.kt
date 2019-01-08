@@ -1,17 +1,17 @@
 package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupView
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.support.constraint.ConstraintLayout
+import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import com.whatsclone.muhammadfaizan.uberclone.R
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.IRiderProfileSetupPresenter
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.RiderProfileSetupPresenter
@@ -20,6 +20,7 @@ import java.io.ByteArrayOutputStream
 
 class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
 
+    private lateinit var constraintLayout: ConstraintLayout
     private lateinit var edtUserName: EditText
     private lateinit var edtuserPhone: EditText
     private lateinit var btnSave: Button
@@ -40,6 +41,7 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
     }
 
     private fun initViews() {
+        constraintLayout = findViewById(R.id.root_layout_rider_profile_setup)
         edtUserName = findViewById(R.id.edt_rider_set_name)
         edtuserPhone = findViewById(R.id.edt_rider_set_phone)
         btnSave = findViewById(R.id.btn_save_rider_profile)
@@ -62,17 +64,34 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
             btnSave.isEnabled = false
             email = edtUserName.text.toString()
             phone = edtuserPhone.text.toString()
-                presenter.initValidation(email, phone)
+            presenter.initValidation(email, phone)
         }
     }
 
     override fun onValidationResults(results: Boolean) {
         if (results) {
-            presenter.uploadImage(stream!!)
+            try {
+                presenter.uploadImage(stream!!)
+            } catch (exc: Exception){
+                hideProgress()
+                var snackbar: Snackbar = Snackbar.make(constraintLayout, "Select an image first", Snackbar.LENGTH_LONG)
+                var mView: View = snackbar.view
+                mView.setBackgroundColor(ContextCompat.getColor(this@RiderProfileSetup, R.color.red))
+                var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
+                txtView.setTextColor(Color.WHITE)
+                snackbar.show()
+            }
         } else {
             hideProgress()
+            var snackbar: Snackbar = Snackbar.make(constraintLayout, "Enter a valid email address and password", Snackbar.LENGTH_LONG)
+            var mView: View = snackbar.view
+            mView.setBackgroundColor(ContextCompat.getColor(this@RiderProfileSetup, R.color.red))
+            var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
+            txtView.setTextColor(Color.WHITE)
+            snackbar.show()
         }
     }
+
 
     override fun onUploadResult(exc: Exception?, uri: Uri?) {
         if (exc == null) {

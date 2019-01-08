@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
+    android:id="@+id/root_layout_rider_profile_setup"
     android:padding="16dp"
     tools:context=".RiderComponents.SetupProfile.ProfileSetupView.RiderProfileSetup">
 
