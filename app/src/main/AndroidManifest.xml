@@ -20,7 +20,7 @@
         <activity android:name=".WelcomeActivity.ActivityWelcome" />
         <activity android:name=".DriverComponents.LoginRegister.View.LoginViewDriver" />
         <activity android:name=".RiderComponents.RiderRegister.RegisterView.RegisterViewRider" />
-        <activity android:name=".RiderComponents.SetupProfile.RiderProfileSetup"></activity>
+        <activity android:name=".RiderComponents.SetupProfile.ProfileSetupView.RiderProfileSetup"></activity>
     </application>
 
 </manifest>

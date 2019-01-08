@@ -1,7 +1,8 @@
-package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile
+package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupView
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -19,5 +20,19 @@ class RiderProfileSetup : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rider_profile_setup)
+        initViews()
+    }
+
+    private fun initViews() {
+        edtUserName = findViewById(R.id.edt_rider_set_name)
+        edtuserPhone = findViewById(R.id.edt_rider_set_phone)
+        btnSave = findViewById(R.id.btn_save_rider_profile)
+        imgUser = findViewById(R.id.img_rider_set_image)
+        progressBar = findViewById(R.id.progress_rider_profile_setup)
+    }
+
+    private fun hideProgress() {
+        btnSave.isEnabled = true
+        progressBar.visibility = View.INVISIBLE
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="16dp"
-    tools:context=".RiderComponents.SetupProfile.RiderProfileSetup">
+    tools:context=".RiderComponents.SetupProfile.ProfileSetupView.RiderProfileSetup">
 
     <TextView
         android:id="@+id/textView3"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_rider_image_setup"
+        android:id="@+id/img_rider_set_image"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -65,10 +65,10 @@
         android:textColorHint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_rider_image_setup" />
+        app:layout_constraintTop_toBottomOf="@+id/img_rider_set_image" />
 
     <EditText
-        android:id="@+id/edt_rider_phone_setup"
+        android:id="@+id/edt_rider_set_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -84,20 +84,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_rider_set_name" />
 
-    <Button
-        android:id="@+id/btn_save_rider_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="8dp"
-        android:background="#06c3ed"
-        android:text="save"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_rider_phone_setup" />
-
     <ProgressBar
         android:id="@+id/progress_rider_profile_setup"
         style="?android:attr/progressBarStyleHorizontal"
@@ -110,5 +96,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btn_save_rider_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#06c3ed"
+        android:text="save"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_rider_set_phone" />
 
 </android.support.constraint.ConstraintLayout>
