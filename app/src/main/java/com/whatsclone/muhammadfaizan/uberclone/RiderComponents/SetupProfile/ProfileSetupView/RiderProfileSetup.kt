@@ -161,5 +161,4 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream)
         }
     }
-
 }
