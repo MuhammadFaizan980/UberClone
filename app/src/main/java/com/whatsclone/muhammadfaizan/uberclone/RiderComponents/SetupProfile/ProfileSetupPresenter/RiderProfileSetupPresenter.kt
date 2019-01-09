@@ -43,6 +43,18 @@ class RiderProfileSetupPresenter constructor(context: Context, riderView: RiderP
     }
 
     override fun saveUserData(name: String, phone: String, uri: Uri) {
+
+        var map: MutableMap<String, String> = HashMap<String, String>()
+        map["name"] = name
+        map["image_uri"] = uri.toString()
+        map["phone"] = phone
+        dbRef.updateChildren(map.toMap()).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                riderView.onDatabaseResults(null)
+            } else {
+                riderView.onDatabaseResults(task.exception!!)
+            }
+        }
     }
 
     override fun initValidation(email: String, phone: String) {
