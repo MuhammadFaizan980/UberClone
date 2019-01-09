@@ -20,7 +20,7 @@ class RiderProfileSetupPresenter constructor(context: Context, riderView: RiderP
     private var context: Context = context
     private var riderView: IRiderProfileSetup = riderView
     private lateinit var model: IRiderProfileSetupModel
-    private var storageRef: StorageReference = FirebaseStorage.getInstance().getReference("/Profile_Pics/${FirebaseAuth.getInstance().uid.toString()}.jpg")
+    private var storageRef: StorageReference = FirebaseStorage.getInstance().getReference("/Uber_Profile_Images/${FirebaseAuth.getInstance().uid.toString()}.jpg")
     private var dbRef = FirebaseDatabase.getInstance().getReference("Uber").child("Users").child(FirebaseAuth.getInstance().uid.toString())
 
     override fun uploadImage(stream: ByteArrayOutputStream) {

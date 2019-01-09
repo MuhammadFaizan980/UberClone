@@ -117,15 +117,6 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
         progressBar.visibility = View.INVISIBLE
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 69 && resultCode == RESULT_OK && data != null) {
-            imgUser.setImageURI(data.data!!)
-            bitmap = MediaStore.Images.Media.getBitmap(contentResolver, data.data!!)
-            stream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream)
-        }
-    }
-
     private fun snackSuccess(message: String) {
         var snackbar: Snackbar = Snackbar.make(constraintLayout, message, Snackbar.LENGTH_LONG)
         var mView: View = snackbar.view
@@ -161,4 +152,14 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
         txtView.setTextColor(Color.WHITE)
         snackbar.show()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 69 && resultCode == RESULT_OK && data != null) {
+            imgUser.setImageURI(data.data!!)
+            bitmap = MediaStore.Images.Media.getBitmap(contentResolver, data.data!!)
+            stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream)
+        }
+    }
+
 }
