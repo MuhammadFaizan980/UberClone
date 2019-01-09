@@ -26,7 +26,7 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
 
     private lateinit var constraintLayout: ConstraintLayout
     private lateinit var edtUserName: EditText
-    private lateinit var edtuserPhone: EditText
+    private lateinit var edtUserPhone: EditText
     private lateinit var btnSave: Button
     private lateinit var imgUser: CircleImageView
     private lateinit var progressBar: ProgressBar
@@ -47,7 +47,7 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
     private fun initViews() {
         constraintLayout = findViewById(R.id.root_layout_rider_profile_setup)
         edtUserName = findViewById(R.id.edt_rider_set_name)
-        edtuserPhone = findViewById(R.id.edt_rider_set_phone)
+        edtUserPhone = findViewById(R.id.edt_rider_set_phone)
         btnSave = findViewById(R.id.btn_save_rider_profile)
         imgUser = findViewById(R.id.img_rider_set_image)
         progressBar = findViewById(R.id.progress_rider_profile_setup)
@@ -67,7 +67,7 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
             progressBar.visibility = View.VISIBLE
             btnSave.isEnabled = false
             name = edtUserName.text.toString()
-            phone = edtuserPhone.text.toString()
+            phone = edtUserPhone.text.toString()
             presenter.initValidation(name, phone)
         }
     }
@@ -122,7 +122,7 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
             imgUser.setImageURI(data.data!!)
             bitmap = MediaStore.Images.Media.getBitmap(contentResolver, data.data!!)
             stream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream)
         }
     }
 
