@@ -9,9 +9,13 @@ import android.provider.MediaStore
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.TextView
 import com.whatsclone.muhammadfaizan.uberclone.R
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.IRiderProfileSetupPresenter
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.RiderProfileSetupPresenter
@@ -29,7 +33,7 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
     private lateinit var presenter: IRiderProfileSetupPresenter
     private lateinit var bitmap: Bitmap
     private lateinit var stream: ByteArrayOutputStream
-    private lateinit var email: String
+    private lateinit var name: String
     private lateinit var phone: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,9 +66,9 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
         btnSave.setOnClickListener {
             progressBar.visibility = View.VISIBLE
             btnSave.isEnabled = false
-            email = edtUserName.text.toString()
+            name = edtUserName.text.toString()
             phone = edtuserPhone.text.toString()
-            presenter.initValidation(email, phone)
+            presenter.initValidation(name, phone)
         }
     }
 
@@ -72,36 +76,34 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
         if (results) {
             try {
                 presenter.uploadImage(stream!!)
-            } catch (exc: Exception){
+            } catch (exc: Exception) {
                 hideProgress()
-                var snackbar: Snackbar = Snackbar.make(constraintLayout, "Select an image first", Snackbar.LENGTH_LONG)
-                var mView: View = snackbar.view
-                mView.setBackgroundColor(ContextCompat.getColor(this@RiderProfileSetup, R.color.red))
-                var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
-                txtView.setTextColor(Color.WHITE)
-                snackbar.show()
+                snackFailure("Select an image first")
             }
         } else {
             hideProgress()
-            var snackbar: Snackbar = Snackbar.make(constraintLayout, "Enter a valid email address and password", Snackbar.LENGTH_LONG)
-            var mView: View = snackbar.view
-            mView.setBackgroundColor(ContextCompat.getColor(this@RiderProfileSetup, R.color.red))
-            var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
-            txtView.setTextColor(Color.WHITE)
-            snackbar.show()
+            snackFailure("Enter a valid name and phone number")
         }
     }
 
 
     override fun onUploadResult(exc: Exception?, uri: Uri?) {
         if (exc == null) {
+            presenter.saveUserData(name, phone, uri!!)
+        } else {
             hideProgress()
-            Toast.makeText(this, uri!!.toString(), Toast.LENGTH_SHORT).show()
+            snackError(exc!!, "Upload Error", "Image upload error")
         }
     }
 
     override fun onDatabaseResults(exc: Exception?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (exc == null) {
+            hideProgress()
+            snackSuccess("Profile saved successfully")
+        } else {
+            hideProgress()
+            snackError(exc!!, "Database Error", "Data cannot be saved right now")
+        }
     }
 
 
@@ -118,9 +120,45 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 69 && resultCode == RESULT_OK && data != null) {
             imgUser.setImageURI(data.data!!)
-            bitmap = MediaStore.Images.Media.getBitmap(contentResolver, data?.data)
+            bitmap = MediaStore.Images.Media.getBitmap(contentResolver, data.data!!)
             stream = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
         }
+    }
+
+    private fun snackSuccess(message: String) {
+        var snackbar: Snackbar = Snackbar.make(constraintLayout, message, Snackbar.LENGTH_LONG)
+        var mView: View = snackbar.view
+        mView.setBackgroundColor(ContextCompat.getColor(this@RiderProfileSetup, R.color.blue))
+        var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
+        txtView.setTextColor(Color.WHITE)
+        snackbar.show()
+    }
+
+    private fun snackError(exc: Exception, dialogTitle: String, message: String) {
+        var snackbar: Snackbar = Snackbar.make(constraintLayout, message, Snackbar.LENGTH_LONG)
+        var mView: View = snackbar.view
+        mView.setBackgroundColor(ContextCompat.getColor(this@RiderProfileSetup, R.color.red))
+        var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
+        txtView.setTextColor(Color.WHITE)
+        snackbar.setAction("DETAILS") {
+            var alertDialog: AlertDialog.Builder = AlertDialog.Builder(this@RiderProfileSetup, R.style.mDialog)
+            alertDialog.setTitle(dialogTitle)
+            alertDialog.setMessage(exc.message!!.toString())
+            alertDialog.setPositiveButton("Close") { dialog, which ->
+                dialog.cancel()
+            }
+            alertDialog.show()
+        }
+        snackbar.show()
+    }
+
+    private fun snackFailure(message: String) {
+        var snackbar: Snackbar = Snackbar.make(constraintLayout, message, Snackbar.LENGTH_LONG)
+        var mView: View = snackbar.view
+        mView.setBackgroundColor(ContextCompat.getColor(this@RiderProfileSetup, R.color.red))
+        var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
+        txtView.setTextColor(Color.WHITE)
+        snackbar.show()
     }
 }
