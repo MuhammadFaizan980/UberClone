@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import com.whatsclone.muhammadfaizan.uberclone.R
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RIderMainMapActivity
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.IRiderProfileSetupPresenter
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.RiderProfileSetupPresenter
 import de.hdodenhof.circleimageview.CircleImageView
@@ -94,6 +95,8 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
     override fun onDatabaseResults(exc: Exception?) {
         if (exc == null) {
             hideProgress()
+            startActivity(Intent(this@RiderProfileSetup, RIderMainMapActivity::class.java))
+            this@RiderProfileSetup.finish()
             presenter.snackSuccess("Profile saved successfully")
         } else {
             hideProgress()
