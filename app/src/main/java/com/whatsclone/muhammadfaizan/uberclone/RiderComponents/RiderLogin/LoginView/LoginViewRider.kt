@@ -15,6 +15,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.whatsclone.muhammadfaizan.uberclone.R
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RIderMainMapActivity
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter.IPresenterLoginRider
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter.PresenterLoginRider
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginView.ILoginViewRider
@@ -84,12 +85,8 @@ class LoginViewRider : AppCompatActivity(), ILoginViewRider {
     override fun onFirebaseResults(results: Boolean, exc: Exception?) {
         if (results) {
             hideProgressBar()
-            var snackBar: Snackbar = Snackbar.make(container, "Log in success", Snackbar.LENGTH_SHORT)
-            var mView: View = snackBar.view
-            mView.setBackgroundColor(ContextCompat.getColor(this@LoginViewRider, R.color.blue))
-            var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
-            txtView.setTextColor(Color.WHITE)
-            snackBar.show()
+            startActivity(Intent(this@LoginViewRider, RIderMainMapActivity::class.java))
+            this@LoginViewRider.finish()
         } else {
             hideProgressBar()
             var snackBar: Snackbar = Snackbar.make(container, "Log in error", Snackbar.LENGTH_LONG)
