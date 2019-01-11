@@ -12,7 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import com.whatsclone.muhammadfaizan.uberclone.R
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RIderMainMapActivity
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RiderMapView.RIderMainMapActivity
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.IRiderProfileSetupPresenter
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.SetupProfile.ProfileSetupPresenter.RiderProfileSetupPresenter
 import de.hdodenhof.circleimageview.CircleImageView

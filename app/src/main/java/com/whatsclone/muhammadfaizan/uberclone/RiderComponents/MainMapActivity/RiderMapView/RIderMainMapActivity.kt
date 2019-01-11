@@ -1,4 +1,4 @@
-package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity
+package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RiderMapView
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

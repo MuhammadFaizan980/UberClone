@@ -15,7 +15,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.whatsclone.muhammadfaizan.uberclone.R
-import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RIderMainMapActivity
+import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RiderMapView.RIderMainMapActivity
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter.IPresenterLoginRider
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginPresenter.PresenterLoginRider
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.RiderLogin.LoginView.ILoginViewRider

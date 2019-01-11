@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RiderComponents.MainMapActivity.RIderMainMapActivity">
+    tools:context=".RiderComponents.MainMapActivity.RiderMapView.RIderMainMapActivity">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -20,6 +20,7 @@
         android:layout_marginTop="26dp"
         android:layout_marginRight="26dp"
         android:background="@drawable/location_search_background"
+        android:elevation="10dp"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingTop="5dp">

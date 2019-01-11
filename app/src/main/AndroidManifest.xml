@@ -38,7 +38,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".RiderComponents.MainMapActivity.RIderMainMapActivity"
+            android:name=".RiderComponents.MainMapActivity.RiderMapView.RIderMainMapActivity"
             android:label="@string/title_activity_rider_main_map"></activity>
     </application>
 
