@@ -12,12 +12,16 @@ class RiderMapPresenter constructor(context: Context, riderMapView: RIderMainMap
     var view: IRiderMainMapActivity = riderMapView
 
     override fun onLocationSearchInitiated(locationName: String) {
-        var geocoder: Geocoder = Geocoder(context)
-        var list: List<Address> = geocoder.getFromLocationName(locationName, 1)
-        if (list.isNotEmpty()) {
-            view.onLocationResults(list[0])
-        } else {
-            return view.onLocationResults(null)
-        }
+       try{
+           var geocoder: Geocoder = Geocoder(context)
+           var list: List<Address> = geocoder.getFromLocationName(locationName, 1)
+           if (list.isNotEmpty()) {
+               view.onLocationResults(list[0])
+           } else {
+               return view.onLocationResults(null)
+           }
+       } catch (exc: Exception) {
+           view.onLocationResults(null)
+       }
     }
 }

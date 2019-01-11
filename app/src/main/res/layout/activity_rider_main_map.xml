@@ -30,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/location_search_background"
             android:hint="Go to location" />
 
         <ImageView
