@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="26dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="56dp"
         android:layout_marginRight="26dp"
         android:background="@drawable/location_search_background"
         android:elevation="10dp"
