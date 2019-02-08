@@ -1,5 +1,6 @@
 package com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RiderMapView
 
+import android.annotation.SuppressLint
 import android.location.Address
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -16,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.whatsclone.muhammadfaizan.uberclone.R
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RiderMapPresenter.IRiderMapPresenter
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RiderMapPresenter.RiderMapPresenter
+import kotlinx.android.synthetic.main.activity_rider_main_map.*
 
 class RIderMainMapActivity : AppCompatActivity(), OnMapReadyCallback, IRiderMainMapActivity {
 
@@ -24,6 +28,7 @@ class RIderMainMapActivity : AppCompatActivity(), OnMapReadyCallback, IRiderMain
     private lateinit var imgSearch: ImageView
     private lateinit var btnConfirm: Button
     private lateinit var presenter: IRiderMapPresenter
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,24 +41,34 @@ class RIderMainMapActivity : AppCompatActivity(), OnMapReadyCallback, IRiderMain
         edtLocation = findViewById(R.id.edt_rider_location_search)
         imgSearch = findViewById(R.id.img_rider_location_search)
         btnConfirm = findViewById(R.id.btn_confirm_rider_location)
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this@RIderMainMapActivity)
         presenter = RiderMapPresenter(this, this@RIderMainMapActivity)
 
         imgSearch.setOnClickListener {
-            var locationName: String = edtLocation.text.toString()
+            val locationName: String = edtLocation.text.toString()
             presenter.onLocationSearchInitiated(locationName)
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun initMap() {
-        var mgr: SupportMapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mgr.getMapAsync(this)
+
+        var fragment: SupportMapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        fragment.getMapAsync(this)
+
+        var locationTask = fusedLocationProviderClient.lastLocation
+        locationTask.addOnCompleteListener{ task ->
+            if (task.isSuccessful) {
+                mMap.isMyLocationEnabled = true
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(task.result!!.latitude, task.result!!.longitude), 15f))
+            } else {
+                Toast.makeText(this@RIderMainMapActivity, "Location Error", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
     override fun onLocationResults(address: Address?) {
