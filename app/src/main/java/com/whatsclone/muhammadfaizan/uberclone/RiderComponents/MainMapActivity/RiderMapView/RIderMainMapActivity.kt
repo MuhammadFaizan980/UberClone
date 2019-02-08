@@ -97,6 +97,7 @@ class RIderMainMapActivity : AppCompatActivity(), OnMapReadyCallback, IRiderMain
     }
 
     private fun setTargetLocation(address: Address) {
+        mMap.clear()
         btnConfirm.visibility = View.VISIBLE
         var markerOptions: MarkerOptions = MarkerOptions().position(LatLng(address.latitude, address.longitude)).snippet(address.locality).draggable(true)
         mMap.addMarker(markerOptions)
