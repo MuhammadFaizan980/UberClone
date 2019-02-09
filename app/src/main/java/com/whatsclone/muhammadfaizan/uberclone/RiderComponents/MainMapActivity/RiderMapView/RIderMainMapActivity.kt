@@ -5,7 +5,6 @@ import android.location.Address
 import android.location.Location
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -56,20 +55,14 @@ class RIderMainMapActivity : AppCompatActivity(), OnMapReadyCallback, IRiderMain
         }
         btnConfirm.visibility = View.INVISIBLE
         btnConfirm.setOnClickListener {
-            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().uid.toString())
+            FirebaseDatabase.getInstance().getReference("Uber").child("Users").child(FirebaseAuth.getInstance().uid.toString())
                     .addValueEventListener(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {}
 
                         override fun onDataChange(p0: DataSnapshot) {
+                            var infoMap = p0.value as HashMap<String, String>
                             var map = HashMap<String, String>()
-                            var infoMap = HashMap<String, String>()
-                            infoMap = p0.value as HashMap<String, String>
-                            Log.i("dxdiag", infoMap.get("email"))
-                            map["pick_latitude"] = currentLocation.latitude.toString()
-                            map["pick_longitude"] = currentLocation.longitude.toString()
-                            map["drop_latitude"] = targetLocation.latitude.toString()
-                            map["drop_longitude"] = targetLocation.longitude.toString()
-                            map["user_uid"] = FirebaseAuth.getInstance().uid.toString()
+
                         }
                     })
         }
