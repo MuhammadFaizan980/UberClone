@@ -5,6 +5,7 @@ import android.location.Address
 import android.location.Location
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -17,6 +18,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.whatsclone.muhammadfaizan.uberclone.R
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RiderMapPresenter.IRiderMapPresenter
 import com.whatsclone.muhammadfaizan.uberclone.RiderComponents.MainMapActivity.RiderMapPresenter.RiderMapPresenter
@@ -49,6 +55,24 @@ class RIderMainMapActivity : AppCompatActivity(), OnMapReadyCallback, IRiderMain
             presenter.onLocationSearchInitiated(locationName)
         }
         btnConfirm.visibility = View.INVISIBLE
+        btnConfirm.setOnClickListener {
+            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().uid.toString())
+                    .addValueEventListener(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {}
+
+                        override fun onDataChange(p0: DataSnapshot) {
+                            var map = HashMap<String, String>()
+                            var infoMap = HashMap<String, String>()
+                            infoMap = p0.value as HashMap<String, String>
+                            Log.i("dxdiag", infoMap.get("email"))
+                            map["pick_latitude"] = currentLocation.latitude.toString()
+                            map["pick_longitude"] = currentLocation.longitude.toString()
+                            map["drop_latitude"] = targetLocation.latitude.toString()
+                            map["drop_longitude"] = targetLocation.longitude.toString()
+                            map["user_uid"] = FirebaseAuth.getInstance().uid.toString()
+                        }
+                    })
+        }
     }
 
     private fun initMap() {
