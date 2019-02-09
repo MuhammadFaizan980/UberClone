@@ -62,6 +62,22 @@ class RIderMainMapActivity : AppCompatActivity(), OnMapReadyCallback, IRiderMain
                         override fun onDataChange(p0: DataSnapshot) {
                             var infoMap = p0.value as HashMap<String, String>
                             var map = HashMap<String, String>()
+                            map["pick_latitude"] = currentLocation.latitude.toString()
+                            map["pick_longitude"] = currentLocation.longitude.toString()
+                            map["drop_latitude"] = targetLocation.latitude.toString()
+                            map["drop_longitude"] = targetLocation.longitude.toString()
+                            map["user_image"] = infoMap["image_uri"]!!
+                            map["user_phone"] = infoMap["phone"]!!
+                            map["user_name"] = infoMap["name"]!!
+                            FirebaseDatabase.getInstance().getReference("Uber").child("Orders").child(FirebaseAuth.getInstance().uid!!.toString())
+                                    .setValue(map).addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                            Toast.makeText(this@RIderMainMapActivity, "Order placed", Toast.LENGTH_SHORT).show()
+                                            btnConfirm.visibility = View.INVISIBLE
+                                        } else {
+                                            Toast.makeText(this@RIderMainMapActivity, task.exception!!.message, Toast.LENGTH_LONG).show()
+                                        }
+                                    }
 
                         }
                     })
