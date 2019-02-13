@@ -9,7 +9,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import android.widget.Button
-import com.whatsclone.muhammadfaizan.uberclone.DriverComponents.LoginRegister.View.LoginViewDriver
+import com.whatsclone.muhammadfaizan.uberclone.DriverComponents.LoginRegister.View.DriverLogin.LoginView.LoginViewDriver
 import com.whatsclone.muhammadfaizan.uberclone.R
 import com.whatsclone.muhammadfaizan.uberclone.UserComponents.LoginRegister.LoginViewRider
 

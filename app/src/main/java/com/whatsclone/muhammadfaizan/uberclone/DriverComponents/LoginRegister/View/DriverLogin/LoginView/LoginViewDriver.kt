@@ -1,4 +1,4 @@
-package com.whatsclone.muhammadfaizan.uberclone.DriverComponents.LoginRegister.View
+package com.whatsclone.muhammadfaizan.uberclone.DriverComponents.LoginRegister.View.DriverLogin.LoginView
 
 import android.content.Intent
 import android.os.Bundle

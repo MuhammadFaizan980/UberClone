@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DriverComponents.LoginRegister.View.LoginViewDriver">
+    tools:context=".DriverComponents.LoginRegister.View.DriverLogin.LoginView.LoginViewDriver">
 
 </android.support.constraint.ConstraintLayout>
