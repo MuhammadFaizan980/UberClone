@@ -3,6 +3,7 @@ package com.whatsclone.muhammadfaizan.uberclone.DriverComponents.LoginRegister.V
 interface Contract {
     interface ILoginViewDriver {
         fun onLoginResults(result: Boolean)
+        fun onFirebaseResults(exc: Exception?)
     }
 
     interface ILoginModelDriver {
@@ -11,5 +12,6 @@ interface Contract {
 
     interface ILoginPresenterDriver {
         fun onLoginInitiated(email: String, pass: String)
+        fun loginUserToFirebase(email: String, pass: String)
     }
 }

@@ -36,10 +36,16 @@ class LoginViewDriver : AppCompatActivity(), Contract.ILoginViewDriver {
 
     override fun onLoginResults(result: Boolean) {
         if (result) {
-            Toast.makeText(this@LoginViewDriver, "Valid credentials", Toast.LENGTH_SHORT).show()
+            presenter.loginUserToFirebase(edtEmail.text.toString(), edtPass.text.toString())
         } else {
             Toast.makeText(this@LoginViewDriver, "Invalid credentials", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onFirebaseResults(exc: Exception?) = if (exc != null) {
+        Toast.makeText(this@LoginViewDriver, exc.message!!, Toast.LENGTH_LONG).show()
+    } else {
+        Toast.makeText(this@LoginViewDriver, "Login Success", Toast.LENGTH_SHORT).show()
     }
 
     override fun onBackPressed() {
