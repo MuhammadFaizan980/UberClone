@@ -88,7 +88,7 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
             presenter.saveUserData(name, phone, uri!!)
         } else {
             hideProgress()
-            presenter.snackError(exc, "Upload Error", "Image upload error")
+            presenter.snackError(exc, "Upload MessageClass", "Image upload error")
         }
     }
 
@@ -100,7 +100,7 @@ class RiderProfileSetup : AppCompatActivity(), IRiderProfileSetup {
             presenter.snackSuccess("Profile saved successfully")
         } else {
             hideProgress()
-            presenter.snackError(exc!!, "Database Error", "Data cannot be saved right now")
+            presenter.snackError(exc!!, "Database MessageClass", "Data cannot be saved right now")
         }
     }
 

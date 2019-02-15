@@ -125,7 +125,7 @@ class RIderMainMapActivity : AppCompatActivity(), OnMapReadyCallback, IRiderMain
                 }
             })
         } else {
-            Toast.makeText(this@RIderMainMapActivity, "Location Error", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RIderMainMapActivity, "Location MessageClass", Toast.LENGTH_SHORT).show()
         }
     }
 

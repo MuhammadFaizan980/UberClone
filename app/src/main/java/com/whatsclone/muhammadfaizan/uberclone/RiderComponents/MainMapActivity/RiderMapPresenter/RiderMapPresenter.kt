@@ -42,7 +42,7 @@ class RiderMapPresenter constructor(context: Context, riderMapView: RIderMainMap
                 if (task.isSuccessful) {
                     view.onGetUserCurrentLocation(task.result)
                 } else {
-                    Toast.makeText(context, "Location Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Location MessageClass", Toast.LENGTH_SHORT).show()
                 }
             }
         } catch (exc:Exception) {

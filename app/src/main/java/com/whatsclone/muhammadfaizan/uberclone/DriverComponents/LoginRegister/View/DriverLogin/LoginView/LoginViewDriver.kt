@@ -2,12 +2,14 @@ package com.whatsclone.muhammadfaizan.uberclone.DriverComponents.LoginRegister.V
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.whatsclone.muhammadfaizan.uberclone.DriverComponents.LoginRegister.View.DriverLogin.Contracts.Contract
 import com.whatsclone.muhammadfaizan.uberclone.DriverComponents.LoginRegister.View.DriverLogin.LoginPresenter.LoginPresenterDriver
+import com.whatsclone.muhammadfaizan.uberclone.DriverComponents.LoginRegister.View.DriverLogin.MessageClass
 import com.whatsclone.muhammadfaizan.uberclone.R
 import com.whatsclone.muhammadfaizan.uberclone.WelcomeActivity.ActivityWelcome
 
@@ -16,6 +18,7 @@ class LoginViewDriver : AppCompatActivity(), Contract.ILoginViewDriver {
     private lateinit var edtEmail: EditText
     private lateinit var edtPass: EditText
     private lateinit var presenter: Contract.ILoginPresenterDriver
+    private lateinit var layout: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,7 @@ class LoginViewDriver : AppCompatActivity(), Contract.ILoginViewDriver {
         btnLogin = findViewById(R.id.btn_login_driver)
         edtEmail = findViewById(R.id.edt_login_email_driver)
         edtPass = findViewById(R.id.edt_login_password_driver)
+        layout = findViewById(R.id.main_layout_driver_login)
         presenter = LoginPresenterDriver(this@LoginViewDriver, this@LoginViewDriver)
 
         btnLogin.setOnClickListener {
@@ -43,9 +47,9 @@ class LoginViewDriver : AppCompatActivity(), Contract.ILoginViewDriver {
     }
 
     override fun onFirebaseResults(exc: Exception?) = if (exc != null) {
-        Toast.makeText(this@LoginViewDriver, exc.message!!, Toast.LENGTH_LONG).show()
+        MessageClass.showMessage(layout, this@LoginViewDriver, exc!!.message.toString(), true)
     } else {
-        Toast.makeText(this@LoginViewDriver, "Login Success", Toast.LENGTH_SHORT).show()
+        MessageClass.showMessage(layout, this@LoginViewDriver, exc!!.message.toString(), false)
     }
 
     override fun onBackPressed() {
