@@ -49,7 +49,7 @@ class LoginViewDriver : AppCompatActivity(), Contract.ILoginViewDriver {
     override fun onFirebaseResults(exc: Exception?) = if (exc != null) {
         MessageClass.showMessage(layout, this@LoginViewDriver, exc!!.message.toString(), true)
     } else {
-        MessageClass.showMessage(layout, this@LoginViewDriver, exc!!.message.toString(), false)
+        MessageClass.showMessage(layout, this@LoginViewDriver, null, false)
     }
 
     override fun onBackPressed() {

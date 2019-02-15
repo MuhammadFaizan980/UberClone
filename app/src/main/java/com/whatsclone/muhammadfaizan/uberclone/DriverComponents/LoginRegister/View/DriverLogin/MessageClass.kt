@@ -13,10 +13,10 @@ import com.whatsclone.muhammadfaizan.uberclone.R
 class MessageClass {
 
     companion object {
-        fun showMessage(view: ConstraintLayout, context: Context, message: String, isError: Boolean) = if (isError) {
+        fun showMessage(view: ConstraintLayout, context: Context, message: String?, isError: Boolean) = if (isError) {
             var snackBar: Snackbar = Snackbar.make(view, "Log in error", Snackbar.LENGTH_LONG)
             snackBar.setAction("DETAILS") {
-                var dialog = AlertDialog.Builder(context)
+                var dialog = AlertDialog.Builder(context, R.style.mDialog)
                 dialog.setTitle("Log in Error")
                 dialog.setCancelable(false)
                 dialog.setMessage(message)
@@ -26,7 +26,7 @@ class MessageClass {
                 dialog.show()
             }
             var mView: View = snackBar.view
-            view.setBackgroundColor(ContextCompat.getColor(context, R.color.red))
+            mView.setBackgroundColor(ContextCompat.getColor(context, R.color.red))
             var txtView: TextView = mView.findViewById(android.support.design.R.id.snackbar_text) as TextView
             txtView.setTextColor(Color.WHITE)
             snackBar.show()
